@@ -31,7 +31,11 @@ if($_POST){
 
             header("Location:/leave/list.php");
 
+        }else{
+            echo '<script>alert("Invalid credentials")</script>';
         }
+    }else{
+        echo '<script>alert("Invalid credentials")</script>';
     }
     
      

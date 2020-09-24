@@ -1,4 +1,42 @@
 $(function(){
+    var isAfterStartDate = function(startDateStr, endDateStr) {
+        var inDate = new Date(startDateStr),
+            eDate = new Date(endDateStr);
+
+        if(inDate < eDate) {
+            return true;
+        }
+
+    };
+    jQuery.validator.addMethod("isAfterStartDate", function(value, element) {
+
+        return isAfterStartDate($('#start_date').val(), value);
+    }, "End date should be after start date");
+
+    var statusCheck = function(status) {
+        if(status != 1) {
+            return true;
+        }
+
+    };
+    jQuery.validator.addMethod("statusCheck", function(value, element) {
+
+        return statusCheck($('#status').val(), value);
+    }, "Please approve or disapprove the leave ");
+
+    var isAfterToday = function(startDateStr){
+        var today = new Date();
+            start = new Date(startDateStr);
+
+            if(today < start){
+                return true;
+            }
+    };
+
+    jQuery.validator.addMethod("isAfterToday",function(value,element){
+        return isAfterToday($('#start_date').val(),value);
+    },"Start date should be after today");
+
     $("form[name='employee_add']").validate({
         rules:{
             surname:{
@@ -15,9 +53,9 @@ $(function(){
         errorClass: "invalid",
 
         messages:{
-            surname:"surname should have three or more characters",
-            pwd:"password should have six or more characters",
-            otherNames:"Other names should have three or more characters"
+            surname:"<p style = 'color:red'>surname should have three or more characters</p>",
+            pwd:"<p style = 'color:red'>password should have six or more characters</p>",
+            otherNames:"<p style = 'color:red'>Other names should have three or more characters</p>"
         },
 
         submitHandler:function(form){
@@ -49,9 +87,9 @@ $(function(){
         },
         errorClass: "invalid",
         messages:{
-            surname:"surname should have three or more characters",
-            pwd:"password should have six or more characters",
-            otherNames:"Other names should have three or more characters"
+            surname:"<p style = 'color:red'>surname should have three or more characters</p>",
+            pwd:"<p style = 'color:red'>password should have six or more characters</p>",
+            otherNames:"<p style = 'color:red'>Other names should have three or more characters</p>"
         },
 
         submitHandler:function(form){
@@ -66,11 +104,15 @@ $(function(){
                 minlength:10,
                 required:true,
                 maxlength:20
+            },
+            status:{
+                statusCheck:true
             }
         },
         errorClass: "invalid",
         messages:{
-            remark:"Remark should have more than ten  but less than twenty characters"
+            remark:"<p style = 'color:red'>Remark should have more than ten  but less than twenty characters</p>",
+            status:"<p style = 'color:red'>Please approve or disapprove the leave</p>"
         },
 
         submitHandler:function(form){
@@ -82,10 +124,12 @@ $(function(){
         rules:{
             
            start:{
-               required:true
+               required:true,
+               isAfterToday:true
            },
            end:{
-               required:true
+               required:true,
+               isAfterStartDate: true
            },
            reason:{
                required:true,
@@ -94,7 +138,9 @@ $(function(){
         },
         errorClass: "invalid",
         messages:{
-            reason:"Please enter a reason  worthy of 10 or more characters"
+            reason:"<p style = 'color:red'>Please enter a reason  worthy of 10 or more characters</p>",
+            end:"<p style = 'color:red'> Start date should be before end date</p>",
+            start:"<p style = 'color:red'>Start date should be after today</p>"
         },
 
         submitHandler:function(form){

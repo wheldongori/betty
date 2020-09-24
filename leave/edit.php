@@ -46,12 +46,7 @@ if($_POST){
   $leave->leaveStatusId = $_POST['status'];
   
 
-  if($requested_leave_days > $available_leave_days){
-    echo '<div class="alert alert-danger" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <strong>Failed!</strong> Leave days requested are more than available days!
-  </div>';
-  }elseif($requested_leave_days > $total_leave_days){
+  if($requested_leave_days > $total_leave_days && $leave->leaveStatusId ==2 ){
     echo '<div class="alert alert-danger" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <strong>Failed!</strong> Leave days requested are more than total days!
@@ -109,18 +104,18 @@ if($_POST){
 
       <div class="form-group">
       <label for="department">Total leave Days:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter department name" name="ave_leave" 
+      <input type="text" class="form-control" id="total" placeholder="Enter department name" name="ave_leave" 
       value = "<?=$oneLeave['ave_leave'];?>" readonly/>
       <br/>
       <label for="department">Number of leave Days requested:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter department name" name="request" 
+      <input type="text" class="form-control" id="request" placeholder="Enter department name" name="request" 
       value = "<?=$oneLeave['No_Of_Days'];?>" readonly/>
       </div>
 
      
       <div class="form-group">
       <label for="department">Remaining leave Days after request:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter department name" name="remainder" 
+      <input type="text" class="form-control" id="remaining" placeholder="Enter department name" name="remainder" 
       value = "<?=$oneLeave['available_leave'];?>" readonly/>
       <br/>
       </div>
@@ -128,7 +123,7 @@ if($_POST){
       <div class="form-group">
       <label>Start Date:</label>
         <!-- <div class='input-group date' id='datetimepicker1'> -->
-          <input type='Date' name="start" value = "<?=$oneLeave['startDate'];?>" placeholder="Choose start date" class="form-control" readonly/>
+          <input type='Date' name="start" id="start_date" value = "<?=$oneLeave['startDate'];?>" placeholder="Choose start date" class="form-control" readonly/>
           <!-- <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
@@ -138,7 +133,7 @@ if($_POST){
       <div class="form-group">
       <label>End Date:</label>
         <!-- <div class='input-group date' id='datetimepicker2'> -->
-          <input type='Date' name="end" value = "<?=$oneLeave['end_Date'];?>" placeholder="Choose end date" class="form-control" readonly/>
+          <input type='Date' name="end" id="end_Date" value = "<?=$oneLeave['end_Date'];?>" placeholder="Choose end date" class="form-control" readonly/>
           <!-- <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
@@ -175,7 +170,7 @@ if($_POST){
 
     <div class="form-group">
         <label>Leave Status:</label>
-        <select name="status" class="form-contol">
+        <select name="status" id = "status" class="form-contol">
                 <?php while($row2 = $status->fetch(PDO::FETCH_ASSOC)){?>
               <?php if($oneLeave['leaveStatusId'] == $row2['leaveStatusId']):?>
                     <option selected = 'selected' value="<?php echo $row2['leaveStatusId']; ?>"><?php echo $row2['leaveStatus']; ?>

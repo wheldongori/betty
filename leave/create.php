@@ -55,6 +55,14 @@ if($_POST){
   $leave->empid = $_SESSION['id'];
   $leave->leaveTid = $_POST['type'];
   $leave->leaveStatusId = 1;
+  // $today = date_create($leave->datePosted);
+  // $diff = date_diff($today,$start);
+  // $days = $diff->format("%R%a");
+
+  // print_r($days);exit;
+if(strtotime($leave->end_Date) < strtotime($leave->startDate)){
+  echo '<script>alert("Start date should be equal to or  ahead of today\'s  date")</script>';
+ }
 
   // print_r($leave->No_Of_Days);exit;
 
@@ -63,6 +71,7 @@ if($_POST){
    && !empty($leave->leaveTid)){
      $leave->create();
      header("Location:list.php");
+     
     
    }else{
      echo "error";
@@ -114,7 +123,7 @@ if($_POST){
       <div class="form-group">
       <label>Date start:</label>
         <!-- <div class='input-group date' id='datetimepicker1'> -->
-          <input type='Date' name="start" placeholder="Choose start date" class="form-control" required/>
+          <input type='Date' name="start" id = "start_date" placeholder="Choose start date" class="form-control" required/>
           <!-- <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
@@ -124,7 +133,7 @@ if($_POST){
       <div class="form-group">
       <label>Date end:</label>
         <!-- <div class='input-group date' id='datetimepicker2'> -->
-          <input type='Date' name="end" placeholder="Choose end date" class="form-control" required/>
+          <input type='Date' name="end" id = "end_Date" placeholder="Choose end date" class="form-control" required/>
           <!-- <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>

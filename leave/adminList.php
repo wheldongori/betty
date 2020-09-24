@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['id'])){
+if(!isset($_SESSION['id']) && $_SESSION['role'] == 'supervisor' || $_SESSION['role'] == 'director'){
     header("Location:/auth/login.php");
 }
  //include config files
@@ -18,48 +18,22 @@ $leave->empid = $_SESSION['id'];
 
 $leaves = $leave->listLeaves();
 
-// extract($leaves);
-
-// print_r($leaveId);
-
-// print_r($leaves);
-if($_SESSION['role'] == 'supervisor' || $_SESSION['role'] == 'director'){
-    $leave->leaveStatusId = 1;
-    $leaves = $leave->readPendingLeaves();
-}
-
-
 include_once(WEB_ROOT.'templates/header.php');
 
 ?>
 <div class="container">
 <div class="card-header">
-<?php if(empty($leaves) && $_SESSION['role'] == 'supervisor' || $_SESSION['role'] == 'director'):?>
-<p><strong> NO LEAVES ARE PENDING</strong></p>
-<a href="create.php" class="btn btn-primary  ">  
-          <i class="fa fa-plus-circle fw-fa"></i> New</a></div><br/>
-<?php elseif(empty($leaves)):?>
+<?php if(empty($leaves)):?>
     <p><strong> NO LEAVES ARE AVAILABLE FOR THIS USER</strong></p>
     <a href="create.php" class="btn btn-primary  ">  
           <i class="fa fa-plus-circle fw-fa"></i> New</a></div><br/>
 <?php else:?>
-    <?php if(!$_SESSION['role'] == 'supervisor' || !$_SESSION['role'] == 'director'):?>
-          <p class="lead"> <strong>MY LEAVE LISTINGS</strong></p>
-          <a href="create.php" class="btn btn-primary">  
-    <?php else:?>  
-        <?php if($_SESSION['role'] == 'supervisor' || $_SESSION['role'] == 'director'){ ?>
-        <p><strong> LEAVE LISTINGS</strong></p>
+    <p><strong> MY LEAVE LISTINGS</strong></p>
     <a href="create.php" class="btn btn-primary  ">  
-          <i class="fa fa-plus-circle fw-fa"></i> New</a> 
-          
-        <a href="adminList.php" class="btn btn-success pull-right">  
-          <i class="fa fa-list fw-fa"></i> MY LEAVES</a>
+          <i class="fa fa-plus-circle fw-fa"></i> New</a>
+          <a href="list.php" class="btn btn-success pull-right ">  
+          <i class="fa fa-backward fw-fa"></i> Back</a>
           </div><br/>
-          <?php }else{?>
-            <p><strong>MY LEAVE LISTINGS</strong></p>
-    <a href="create.php" class="btn btn-primary  ">  
-          <i class="fa fa-plus-circle fw-fa"></i> New</a></div><br/>
-          <?php }?>
     <?php endif;?>
 <table style = " font-family: arial, sans-serif;border-collapse: collapse; width = 70%;">
                        
@@ -116,7 +90,7 @@ include_once(WEB_ROOT.'templates/header.php');
                        </tr>
                        </table>
                     
-                       <?php endif;?>
+                       
 
                        <?php
                        include_once(WEB_ROOT.'templates/footer.php');
