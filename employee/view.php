@@ -1,4 +1,16 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['id'])){
+       header("Location:/auth/login.php");
+   }elseif($_SESSION['role'] != 'supervisor'){
+       header("Location:/auth/login.php");
+   }elseif($_SESSION['role'] == 'employee'){
+       header("Location:/auth/login.php");
+   }elseif($_SESSION['role'] == 'manager'){
+       header("Location:/auth/login.php");
+   }
+   
 include_once '../config/config.php';
 //include config files
 require_once(WEB_ROOT.'config/database.php');

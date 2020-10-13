@@ -1,9 +1,15 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['id']) && $_SESSION['role'] == 'supervisor' || $_SESSION['role'] == 'director'){
+if(!isset($_SESSION['id'])){
     header("Location:/auth/login.php");
-}
+  }elseif($_SESSION['role'] != 'supervisor'){
+    header("Location:/auth/login.php");
+  }elseif($_SESSION['role'] == 'employee'){
+    header("Location:/auth/login.php");
+  }elseif($_SESSION['role'] == 'manager'){
+    header("Location:/auth/login.php");
+  }
  //include config files
  include_once '../config/config.php';
  require_once(WEB_ROOT.'config/database.php');
@@ -76,8 +82,7 @@ include_once(WEB_ROOT.'templates/header.php');
                        <td style = " border: 1px solid #dddddd;text-align: left;padding: 8px;">
                        <a title="Edit" href="edit.php?req=<?=$value['leaveId'];?>"  class="btn btn-success btn-sm  "> 
                         <span class="fa fa-edit fw-fa"></span></a>
-                        <a title="view" href="view.php?req=<?=$value['leaveId'];?>"  class="btn btn-primary btn-sm  "> 
-                        <span class="fa fa-eye fw-fa"></span></a></td>
+                        </td>
                         <?php endif;?>
                         </tr>
                    

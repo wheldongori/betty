@@ -48,7 +48,7 @@ if($_POST){
   $end= date_create($leave->end_Date);
   // $leave->end_Date = $leave->end_Date->format('Y-m-d H:i:s');
   $leave->No_Of_Days = date_diff($start,$end);
-  $leave->No_Of_Days = $leave->No_Of_Days->days + 2;
+  $leave->No_Of_Days = $leave->No_Of_Days->days + 1;
   $leave->ave_leave = $_POST['ave_leave'] - $leave->No_Of_Days;
   $leave->reason = $_POST['reason'];
   $leave->datePosted = date('y-m-d');
@@ -60,9 +60,9 @@ if($_POST){
   // $days = $diff->format("%R%a");
 
   // print_r($days);exit;
-if(strtotime($leave->end_Date) < strtotime($leave->startDate)){
-  echo '<script>alert("Start date should be equal to or  ahead of today\'s  date")</script>';
- }
+// if(strtotime($leave->end_Date) < strtotime($leave->startDate)){
+//   echo '<script>alert("Start date should be equal to or  ahead of today\'s  date")</script>';
+//  }
 
   // print_r($leave->No_Of_Days);exit;
 

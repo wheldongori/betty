@@ -2,7 +2,13 @@
 session_start();
 
 if(!isset($_SESSION['id'])){
-    header("Location:/auth/login.php");
+  header("Location:/auth/login.php");
+}elseif($_SESSION['role'] != 'supervisor'){
+  header("Location:/auth/login.php");
+}elseif($_SESSION['role'] == 'employee'){
+  header("Location:/auth/login.php");
+}elseif($_SESSION['role'] == 'manager'){
+  header("Location:/auth/login.php");
 }
 
 include_once '../config/config.php';
@@ -76,8 +82,8 @@ if($_POST){
     // }elseif($passlen < 6){
     //   array_push($errors,'password should have six or more characters');
     // }else{
-    // if(!empty($employee->surname) && !empty($employee->otherNames) && !empty($employee->password)
-    //  && !empty($employee->gender) && !empty($employee->DoB)){
+    if(!empty($employee->surname) && !empty($employee->otherNames) && !empty($employee->password)
+     && !empty($employee->gender) && !empty($employee->DoB)){
          $employee->edit();
 
          $emp->empid = $_POST['id'];
@@ -88,9 +94,9 @@ if($_POST){
 
          $emp->createHist();
          header("Location:list.php");
-    //  }else{
-    //      echo "error";
-    //  }
+     }else{
+         echo "error";
+     }
     // }
 
 }

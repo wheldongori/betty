@@ -89,7 +89,7 @@ class EmpHist{
     public function readHist(){
         $sql = "SELECT * FROM 
                 ". $this->table6 ."
-              WHERE empid=:empid ORDER BY id DESC LIMIT 0,1";
+              WHERE empid=:empid ORDER BY eid DESC LIMIT 0,1";
         
         $stmt = $this->conn->prepare($sql);
         

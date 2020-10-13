@@ -4,9 +4,9 @@
         private $user = 'deno';
         private $password = 'Deno@1234';
 
-        public $conn;
+        private $conn;
 
-        public static $instance;
+        private static $instance;
 
         
 

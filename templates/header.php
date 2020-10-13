@@ -26,7 +26,12 @@ input.invalid, textarea.invalid, select.invalid
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-        	<a class="navbar-brand" href="<?=SRV_ROOT.'templates/dashboard.php';?>">Leave System</a>
+          <?php if($_SESSION['role'] == 'director' || $_SESSION['role'] == 'supervisor'):?>
+          <a class="navbar-brand" href="<?=SRV_ROOT.'templates/dashboard.php';?>">Leave System</a>
+          <?php else:?>
+            <a class="navbar-brand" href="<?=SRV_ROOT.'leave/list.php';?>">Leave System</a>
+          <?php endif;?>
+
         </div>
         <div id="navbar">
           <div class="collapse navbar-collapse" id="mainNavBar">
@@ -40,6 +45,7 @@ input.invalid, textarea.invalid, select.invalid
             <li><a href="<?=SRV_ROOT.'employee/list.php';?>">Employee</a></li>
           	<li><a href="<?=SRV_ROOT.'department/list.php';?>">Department</a></li>
             <li><a href="<?=SRV_ROOT.'company/list.php';?>">Company</a></li>
+            <li><a href="<?=SRV_ROOT.'templates/dashboard.php';?>">Dashboard</a></li>
             <?php endif;?>
             <li><a href="<?=SRV_ROOT.'leave/list.php';?>">Leave</a></li>
             <li><a href="<?=SRV_ROOT.'auth/logout.php';?>">Logout</a></li>

@@ -13,3 +13,46 @@ table {
   tr:nth-child(even) {
     background-color: #dddddd;
   }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 300px 300px ;
+    grid-auto-rows: 100px;
+
+    margin: auto;
+    width: 60%;
+    margin-top: 120px;
+   
+
+    /* justify-items: center; */
+    /* align-items: center; */
+    
+  }
+  * {box-sizing: border-box;}
+  
+  /* .wrapper {
+    border: 2px solid #f76707;
+    border-radius: 5px;
+    background-color: #fff4e6;
+  } */
+  
+  .wrapper > div {
+    border: 5px solid white;
+    border-radius: 10px;
+    background-color: #0275d8 ;
+    padding: 35px;
+    color: white;
+    /* justify-content: center; */
+    /* position: center; */
+    
+  }
+
+  .wrapper > div > a{
+    color:white;
+  }
+  
+
+  .wrapper > div > a:hover{
+      text-decoration: none;
+  }
+  

@@ -4,6 +4,8 @@ session_start();
 if(!isset($_SESSION['id'])){
     header("Location:/auth/login.php");
 }
+
+// echo $_SESSION['role'];
  //include config files
  include_once '../config/config.php';
  require_once(WEB_ROOT.'config/database.php');
@@ -35,30 +37,33 @@ include_once(WEB_ROOT.'templates/header.php');
 <div class="container">
 <div class="card-header">
 <?php if(empty($leaves) && $_SESSION['role'] == 'supervisor' || $_SESSION['role'] == 'director'):?>
-<p><strong> NO LEAVES ARE PENDING</strong></p>
 <a href="create.php" class="btn btn-primary  ">  
           <i class="fa fa-plus-circle fw-fa"></i> New</a></div><br/>
+          <h3><strong> NO LEAVES ARE PENDING</strong></h3>
 <?php elseif(empty($leaves)):?>
-    <p><strong> NO LEAVES ARE AVAILABLE FOR THIS USER</strong></p>
     <a href="create.php" class="btn btn-primary  ">  
           <i class="fa fa-plus-circle fw-fa"></i> New</a></div><br/>
+          <h3><strong> NO LEAVES ARE AVAILABLE FOR THIS USER</strong></h3>
 <?php else:?>
     <?php if(!$_SESSION['role'] == 'supervisor' || !$_SESSION['role'] == 'director'):?>
-          <p class="lead"> <strong>MY LEAVE LISTINGS</strong></p>
           <a href="create.php" class="btn btn-primary">  
+          <i class="fa fa-plus-circle fw-fa"></i> New</a>
+          </div><br/>
+          <h3 class="lead"> <strong>MY LEAVE LISTINGS</strong></h3>
     <?php else:?>  
         <?php if($_SESSION['role'] == 'supervisor' || $_SESSION['role'] == 'director'){ ?>
-        <p><strong> LEAVE LISTINGS</strong></p>
     <a href="create.php" class="btn btn-primary  ">  
           <i class="fa fa-plus-circle fw-fa"></i> New</a> 
           
         <a href="adminList.php" class="btn btn-success pull-right">  
-          <i class="fa fa-list fw-fa"></i> MY LEAVES</a>
+          <i class="fa fa-list fw-fa"></i> MY LISTINGS</a>
           </div><br/>
+          <h3><strong> LEAVE LISTINGS</strong></h3>
           <?php }else{?>
-            <p><strong>MY LEAVE LISTINGS</strong></p>
     <a href="create.php" class="btn btn-primary  ">  
           <i class="fa fa-plus-circle fw-fa"></i> New</a></div><br/>
+          <h3><strong>MY LEAVE LISTINGS</strong></h3>
+          
           <?php }?>
     <?php endif;?>
 <table style = " font-family: arial, sans-serif;border-collapse: collapse; width = 70%;">
@@ -102,8 +107,7 @@ include_once(WEB_ROOT.'templates/header.php');
                        <td style = " border: 1px solid #dddddd;text-align: left;padding: 8px;">
                        <a title="Edit" href="edit.php?req=<?=$value['leaveId'];?>"  class="btn btn-success btn-sm  "> 
                         <span class="fa fa-edit fw-fa"></span></a>
-                        <a title="view" href="view.php?req=<?=$value['leaveId'];?>"  class="btn btn-primary btn-sm  "> 
-                        <span class="fa fa-eye fw-fa"></span></a></td>
+                       </td>
                         <?php endif;?>
                         </tr>
                    

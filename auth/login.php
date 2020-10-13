@@ -46,7 +46,7 @@ include_once(WEB_ROOT.'templates/header.php');
 
 ?>
 <div class="container">
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="leave_create" method="post">
+  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="login" method="post">
   <div class="row">
         <div class="col-md-4 col-md-offset-4">
           <h1 class="text-center">Login form</h1>

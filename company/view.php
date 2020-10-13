@@ -1,4 +1,15 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['id'])){
+       header("Location:/auth/login.php");
+   }elseif($_SESSION['role'] != 'supervisor'){
+       header("Location:/auth/login.php");
+   }elseif($_SESSION['role'] == 'employee'){
+       header("Location:/auth/login.php");
+   }elseif($_SESSION['role'] == 'manager'){
+       header("Location:/auth/login.php");
+   }
 $id = (isset($_GET['req']) && $_GET['req'] != '') ? $_GET['req'] : '';
 
 include_once '../config/config.php';

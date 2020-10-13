@@ -139,7 +139,7 @@ $(function(){
         errorClass: "invalid",
         messages:{
             reason:"<p style = 'color:red'>Please enter a reason  worthy of 10 or more characters</p>",
-            end:"<p style = 'color:red'> Start date should be before end date</p>",
+            end:"<p style = 'color:red'> End date should be after start date</p>",
             start:"<p style = 'color:red'>Start date should be after today</p>"
         },
 
@@ -147,6 +147,24 @@ $(function(){
             form.submit();
         }
 
+    }),
+    $("form[name='login']").validate({
+        rules:{
+            id:{
+                required:true
+            },
+            pwd:{
+                required:true
+            },
+        },
+        errorClass:"invalid",
+            messages:{
+                id:"<p style='color:red'>Id is required</p>",
+                pwd:"<p style='color:red'>Password is required</p>"
+            },
+            submitHandler:function(form){
+                form.submit();
+            }
     })
 
 })

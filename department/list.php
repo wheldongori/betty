@@ -1,8 +1,13 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['id']) || 
-$_SESSION['role'] != 'supervisor' || $_SESSION['role'] != 'supervisor' ){
+if(!isset($_SESSION['id'])){
+    header("Location:/auth/login.php");
+}elseif($_SESSION['role'] != 'supervisor'){
+    header("Location:/auth/login.php");
+}elseif($_SESSION['role'] == 'employee'){
+    header("Location:/auth/login.php");
+}elseif($_SESSION['role'] == 'manager'){
     header("Location:/auth/login.php");
 }
  //include config files

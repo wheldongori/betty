@@ -19,7 +19,7 @@ class Login{
                 INNER JOIN ".$this->table2." ON " .$this->table. ".empid = ". $this->table2.".empid
                 INNER JOIN ".$this->table3 ." ON ". $this->table3.".id = ".$this->table2.".id
                 INNER JOIN ".$this->table4 ." ON ".$this->table4.".status_Id = ".$this->table2.".status_Id
-                WHERE ".$this->table.".empid=:empid";
+                WHERE ".$this->table.".empid=:empid ORDER BY eid DESC LIMIT 0,1";
         
         $stmt = $this->conn->prepare($sql);
         
