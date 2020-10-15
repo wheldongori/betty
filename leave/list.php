@@ -7,9 +7,9 @@ if(!isset($_SESSION['id'])){
 
 // echo $_SESSION['role'];
  //include config files
- include_once '../config/config.php';
- require_once(WEB_ROOT.'config/database.php');
- require_once(WEB_ROOT.'objects/leave.php');
+include_once '../config/config.php';
+require_once(WEB_ROOT.'config/database.php');
+require_once(WEB_ROOT.'objects/leave.php');
 
 $database = Database::getInstance();
 $db = $database->getConnection();
@@ -86,10 +86,10 @@ include_once(WEB_ROOT.'templates/header.php');
                                                    </tr>
                                                    <?php
                                                    
-                                                   
+                                                   $data = [];
                                                     foreach($leaves as $leave => $value){
                                                         extract($leaves);
-                                                        // print_r($value);
+                                    
                                                    ?>
                                                   
                                                    <tr>
@@ -119,6 +119,12 @@ include_once(WEB_ROOT.'templates/header.php');
                                                     <?php } ?>
                        </tr>
                        </table>
+
+                     
+                       <div id="chart-container">
+                       <canvas id="myCanvas"></canvas>
+                       </div>
+                      
                     
                        <?php endif;?>
 

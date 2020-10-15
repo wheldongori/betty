@@ -94,7 +94,9 @@ include_once(WEB_ROOT.'templates/header.php');
                                                     <?php } ?>
                        </tr>
                        </table>
-                    
+                       <div id="chart-container">
+                       <canvas id="myCanvas"></canvas>
+                       </div>
                        
 
                        <?php

@@ -162,6 +162,27 @@ class Leave{
         
     }
 
+    public function readLeaves(){
+        $sql = "SELECT leaveId,No_Of_Days FROM 
+                ". $this->table ."
+                INNER JOIN ". $this->table2 ." ON ".$this->table2 .".empid = ". $this->table. ".empid
+                INNER JOIN ". $this->table7 ." ON ". $this->table .".leaveStatusId = ". $this->table7 .".leaveStatusId 
+                WHERE ". $this->table .".empid=:empid ORDER BY leaveId DESC";
+        
+        $stmt = $this->conn->prepare($sql);
+        
+        $stmt->bindParam(":empid",$this->empid,PDO::PARAM_INT);
+
+        $stmt->execute();
+// print_r($sql);echo"<br/>";
+        $row = $stmt->fetchAll();
+
+        return $row;
+        // $this->leaveId = $row['leaveId'];
+        // $this->No_Of_Days = $row['No_Of_Days'];
+        
+    }
+
     public function readPendingLeaves(){
         $sql = "SELECT * FROM 
                 ". $this->table ."
